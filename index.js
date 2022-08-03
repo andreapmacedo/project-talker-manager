@@ -62,7 +62,7 @@ app.put(
     const { name, age, talk: { watchedAt, rate } } = req.body;
     const speakers = await fs.readFile('./talker.json', 'utf8');
     const speakersParse = JSON.parse(speakers);
-    const filtered = speakersParse.filter((talker) => talker.id !== Number(id));
+    const filtered = speakersParse.filter((speaker) => speaker.id !== Number(id));
     const speaker = {
       id: Number(id),
       name,
