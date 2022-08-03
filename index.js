@@ -3,7 +3,7 @@ const fs = require('fs/promises');
 const talker = require('./talker');
 const { validateEmail, validatePassword, generateToken,
    validateToken, validateName, validateAge, validateTalk,
-   validateRateWatchedAt, validateRate } = require('./helper/helpers');
+   validateRateWatchedAt, validateRate, getBySearch } = require('./helper/helpers');
 
 const speakersPath = './talker.json';
 
@@ -17,6 +17,16 @@ const PORT = '3000';
 app.get('/', (_request, response) => {
   response.status(HTTP_OK_STATUS).send();
 });
+
+app.get(
+  '/talker/search',
+  validateToken,
+  async (request, response) => {
+    const { q } = request.query;
+    const searchResult = await getBySearch(q);
+    return response.status(200).json(searchResult);
+  }
+);
 
 app.use('/talker', talker);
 

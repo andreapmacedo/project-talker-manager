@@ -110,6 +110,17 @@ const validateRate = (req, res, next) => {
   next();
 };
 
+const getBySearch = async (search) => {
+  const speakers = await fs.readFile('./talker.json', 'utf8');
+  const speakersParse = JSON.parse(speakers);
+  if (search === '') {
+    return speakersParse;
+  }
+  const filtered = speakersParse.filter((speaker) => speaker.name.includes(search));
+  return filtered;
+};
+
+
 module.exports = {
   validateRateWatchedAt,
   readFile,
@@ -121,4 +132,5 @@ module.exports = {
   validateAge,
   validateTalk,
   validateRate,
+  getBySearch,
 };
