@@ -25,7 +25,7 @@ app.get(
     const { q } = request.query;
     const searchResult = await getBySearch(q);
     return response.status(200).json(searchResult);
-  }
+  },
 );
 
 app.use('/talker', talker);

@@ -120,7 +120,6 @@ const getBySearch = async (search) => {
   return filtered;
 };
 
-
 module.exports = {
   validateRateWatchedAt,
   readFile,
