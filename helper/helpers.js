@@ -110,12 +110,6 @@ const validateRate = (req, res, next) => {
   next();
 };
 
-const getSpeakers = async () => {
-  const talkers = await fs.readFile('./talker.json', 'utf8');
-  if (JSON.parse(talkers).length) return JSON.parse(talkers);
-  return [];
-};
-
 module.exports = {
   validateRateWatchedAt,
   readFile,
@@ -127,5 +121,4 @@ module.exports = {
   validateAge,
   validateTalk,
   validateRate,
-  getSpeakers,
 };

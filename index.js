@@ -1,17 +1,16 @@
-const express = require('express');
 const bodyParser = require('body-parser');
-const talker = require('./talker');
+const express = require('express');
 const fs = require('fs/promises');
+const talker = require('./talker');
 const { validateEmail, validatePassword, generateToken,
    validateToken, validateName, validateAge, validateTalk,
-   validateRateWatchedAt, validateRate, getSpeakers } = require('./helper/helpers');
+   validateRateWatchedAt, validateRate } = require('./helper/helpers');
 
 const app = express();
 app.use(bodyParser.json());
 
 const HTTP_OK_STATUS = 200;
 const PORT = '3000';
-
 
 // não remova esse endpoint, e para o avaliador funcionar
 app.get('/', (_request, response) => {
@@ -20,7 +19,8 @@ app.get('/', (_request, response) => {
 
 app.use('/talker', talker);
 
-app.post('/login', validateEmail, validatePassword, (req, res) =>  res.status(200).json(generateToken()));
+app.post('/login', validateEmail, validatePassword,
+  (req, res) => res.status(200).json(generateToken()));
 
 app.post(
   '/talker',
